@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tajna Wiadomość</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        input[type="password"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #333;
+            border-radius: 6px;
+            background-color: #2a2a2a;
+            color: #fff;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="password"]:focus {
+            border-color: #00adb5;
+        }
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #00adb5;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #008c95;
+        }
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+            padding: 15px;
+            border-radius: 6px;
+            line-height: 1.5;
+        }
+        .success {
+            background-color: #1b4332;
+            color: #52b788;
+            border: 1px solid #52b788;
+        }
+        .error {
+            background-color: #4a1212;
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Wprowadź kod dostępu</h1>
+    <input type="password" id="accessCode" placeholder="xxxx" maxlength="4">
+    <br>
+    <button onclick="checkCode()">Sprawdź kod</button>
+    
+    <div id="messageBox" class="result"></div>
+</div>
+
+<script>
+    function checkCode() {
+        const inputCode = document.getElementById("accessCode").value;
+        const messageBox = document.getElementById("messageBox");
+        
+        // Prawidłowy kod
+        const correctCode = "1016";
+        
+        if (inputCode === correctCode) {
+            messageBox.innerHTML = "🔓 Sukces!<br><br>Biała koperta znajduje się <strong>za tablicą szkolną</strong>.";
+            messageBox.className = "result success";
+            messageBox.style.display = "block";
+        } else {
+            messageBox.innerHTML = "❌ Błędny kod. Spróbuj ponownie.";
+            messageBox.className = "result error";
+            document.getElementById("accessCode").value = ""; // Czyszczenie pola
+        }
+    }
+    
+    // Uruchomienie sprawdzenia po wciśnięciu Enter
+    document.getElementById("accessCode").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            checkCode();
+        }
+    });
+</script>
+
+</body>
+</html>
